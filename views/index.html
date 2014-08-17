@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Snake!</title>
+	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+	<div id="pannel" style="margin-bottom: 10px;"></div> 
+	<select id="selSize"> 
+		<option value="20">20*20</option> 
+		<option value="30">30*30</option> 
+		<option value="40">40*40</option> 
+	</select> 
+	<select id="selSpeed"> 
+		<option value="500">速度-慢</option> 
+		<option value="250" selected="selected">速度-中</option> 
+		<option value="100">速度-快</option> 
+	</select> 
+	<input type="button" id="startBtn">"开始"</input>
+
+
+	<script src="/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="/javascripts/bootstrap.min.js"></script>
+	<script src="/javascripts/snake.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
