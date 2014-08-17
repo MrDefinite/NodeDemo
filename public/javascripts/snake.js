@@ -1,16 +1,16 @@
 var Direction = {
-	this.up = "up";
-	this.down = "down";
-	this.left = "left";
-	this.right = "right";
+	up: "up",
+	down: "down",
+	left: "left",
+	right: "right"
 };
 
 var Setting = {
 	// Default setting
-	this.col = 20;
-	this.row = 20;
-	this.speed = 250;
-	this.workThread = null;
+	col: 20,
+	row: 20,
+	speed: 250,
+	workThread: null
 };
 
 function Control() {
@@ -218,7 +218,7 @@ window.onload = function() {
 	control.init("pannel");
 	document.getElementById("startBtn").onclick = function() {
 		control.start();
-		
+
 	}
 
 

@@ -1,9 +1,9 @@
 // Routes settings
 
 exports.index = function(req, res) {
-	res.sendFile('index.html');
+	res.render('index', { title: 'Snake!'});
 }
 
 exports.pad = function(req, res) {
-	res.sendFile('pad.html');
+	//res.sendFile('pad.html');
 }
