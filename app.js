@@ -5,11 +5,14 @@ var express = require('express'),
 	routes = require('./routes'),
 	path = require('path'),
 	ejs = require('ejs'),
-	http = require('http').Server(app),
-	io = require('socket.io')(http);
+	http = require('http'),
+	io,
+	app = express();
+	server = http.createServer(app);
 
 // Settings
-var app = express();
+io = require('socket.io').listen(server)
+
 app.set('views', __dirname + '/views');
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
@@ -32,5 +35,5 @@ io.on('connection', function(socket) {
 	});
 });
 
-app.listen(8080);
+server.listen(8080);
 
