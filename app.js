@@ -21,17 +21,19 @@ app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
 // Routes
 app.get('/', routes.index);
 app.get('/pad', routes.pad);
 
 io.on('connection', function(socket) {
 	socket.on('game', function(msg) {
-		//io.emit('chat message', msg);
+
 	});
 	socket.on('pad', function(msg) {
-		//io.emit('chat message', msg);
+		console.log(msg);
+		socket.broadcast.emit('game', {
+			message: msg
+		});
 	});
 });
 

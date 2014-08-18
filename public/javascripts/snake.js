@@ -65,7 +65,7 @@ Control.prototype.start = function() {
 		socket = io();
 
 	socket.on('game', function(dir) {
-		self.snake.setDir(dir);
+		self.snake.setDir(dir.message);
 	});
 
 	this.food.create();

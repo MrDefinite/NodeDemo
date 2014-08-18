@@ -5,5 +5,5 @@ exports.index = function(req, res) {
 }
 
 exports.pad = function(req, res) {
-	//res.sendFile('pad.html');
+	res.render('pad', { title: 'Pad!'});
 }
