@@ -1,0 +1,39 @@
+.pannel {
+	margin-top: 30px;
+	border-collapse: collapse;
+	border: 1 solid black;
+}
+
+.dot {
+	height: 15px;
+	width: 15px;
+	background-color: white;
+}
+
+.up {
+	border-top: 1 solid #CCC;
+}
+
+.left {
+	border-left: 1 solid #CCC;
+}
+
+.right {
+	border-right: 1 solid #CCC;
+}
+
+.bottom {
+	border-bottom: 1 solid #CCC;
+}
+
+.food {
+	background-color: red;
+}
+
+.snake-body {
+	background-color: blue;
+}
+
+.snake-head {
+	background-color: blue;
+}

@@ -7,8 +7,8 @@ var Direction = {
 
 var Setting = {
 	// Default setting
-	col: 20,
-	row: 20,
+	col: 50,
+	row: 30,
 	speed: 250,
 	workThread: null
 };
@@ -19,21 +19,45 @@ function Control() {
 }
 
 Control.prototype.init = function(pannelId) {
-	var map = [],
+	var map = '',
 		x,
 		y;
 
-	map.push('<table>');
 	for (x = 0; x < Setting.row; x++) {
-		map.push('<tr>');
+		map += '<tr>';
 		for (y = 0; y < Setting.col; y++) {
-			map.push('<td id="map_' + x + '_' + y + '"></td>');
+			if (x == 0 && y == 0) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot up left"></td>';
+			}
+			else if (x == 0 && y == Setting.col - 1) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot up right"></td>';
+			}
+			else if (x == Setting.row - 1 && y == 0) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot bottom left"></td>';
+			}
+			else if (x == Setting.row - 1 && y == Setting.col - 1) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot bottom right"></td>';
+			}
+			else if(x == 0) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot up"></td>';
+			}
+			else if (x == Setting.row - 1) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot bottom"></td>';
+			}
+			else if (y == 0) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot left"></td>';
+			}
+			else if (y == Setting.col - 1) {
+				map += '<td id="map_' + x + '_' + y + '" class="dot right"></td>';
+			}
+			else {
+				map += '<td id="map_' + x + '_' + y + '" class="dot"></td>';
+			}
 		}
-		map.push('</tr>');
+		map += '</tr>';
 	}
-	map.push('</table>');
-	this.pannel = document.getElementById(pannelId);
-	this.pannel.innerHTML = map.join("");
+
+	$("#" + pannelId).html(map);
 }
 
 Control.prototype.start = function() {
@@ -62,10 +86,11 @@ Position.prototype.set = function(x, y) {
 }
 
 function Food() {
-	this.pos = null;
+	this.pos = new Position(0, 0);
 }
 
 Food.prototype.create = function(snakePos) {
+	Food.prototype.remove.call(this);
 	var x,
 		y,
 		i,
@@ -85,17 +110,17 @@ Food.prototype.create = function(snakePos) {
 		}
 	}
 	this.pos = new Position(x, y);
-	document.getElementById('map_' + this.pos.x + '_' + this.pos.y).className = "food";
+	$("#map_" + this.pos.x + "_" + this.pos.y).attr("class", "food");
 }
 
 Food.prototype.remove = function() {
-	document.getElementById('map_' + this.pos.x + '_' + this.pos.y).className = "";
+	$("#map_" + this.pos.x + "_" + this.pos.y).attr("class", "dot");
 }
 
 function Snake() {
 	this.isDone = false;
 	this.direction = Direction.right;
-	this.pos = [];
+	this.pos = new Array(new Position(0, 0));
 }
 
 Snake.prototype.move = function() {
@@ -103,9 +128,9 @@ Snake.prototype.move = function() {
 		j,
 		head,
 		isOver,
-		body;
+		snakeBody;
 
-	document.getElementById('map_' + this.pos[0].x + '_' + this.pos[0].y).className = "";
+	$("#map_" + this.pos[0].x + "_" + this.pos[0].y).attr("class", "dot");
 
 	for(i = 0; i < this.pos.length - 1; i++) {
 		this.pos[i].x = this.pos[i + 1].x;
@@ -136,17 +161,19 @@ Snake.prototype.move = function() {
 				isOver = true;
 				break;
 			}
-			if(isOver) {
-				Snake.prototype.over();
-			}
+		}
+		if(isOver) {
+			Snake.prototype.over.call(this);
+			break;
+		}
 
-			body = document.getElementById('map_' + this.pos[i].x + '_' + this.pos[i].y);
-			if (!!body) {
-				body.className = "snake";
-			}
-			else {
-				Snake.prototype.over();
-			}
+		snakeBody = $("#map_" + this.pos[i].x + "_" + this.pos[i].y);
+		if (!!snakeBody.length) {
+			snakeBody.attr("class", "snake-body");
+		}
+		else {
+			Snake.prototype.over.call(this);
+			break;
 		}
 	}
 	this.isDone = true;
@@ -154,7 +181,7 @@ Snake.prototype.move = function() {
 
 Snake.prototype.over = function() {
 	clearInterval(Setting.workThread);
-
+	alert("游戏结束！"); 
 }
 
 Snake.prototype.eat = function(food) {
@@ -212,15 +239,15 @@ Snake.prototype.setDir = function(dir) {
 }
 
 
-var control = new Control();
-
-window.onload = function() {
+$(document).ready(function() {
+	var control = new Control();
 	control.init("pannel");
-	document.getElementById("startBtn").onclick = function() {
+
+	$("#startBtn").on('click', function() {
 		control.start();
+	});
+});
 
-	}
 
 
-}
 

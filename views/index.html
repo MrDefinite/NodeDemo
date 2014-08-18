@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title><% title %></title>
 	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+	<link href="/stylesheets/snake.css" rel="stylesheet">
 </head>
 <body>
 	<div id="container">
@@ -14,7 +15,7 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#about">Start</a></li>
+						<li><a id="startBtn" href="#">Start</a></li>
 						<li><a href="#contact">Pause</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting<span class="caret"></span></a>
@@ -31,20 +32,9 @@
 			</div>
 		</div>
 
-	</div>
-	<div id="pannel" style="margin-bottom: 10px;"></div> 
-	<select id="selSize"> 
-		<option value="20">20*20</option> 
-		<option value="30">30*30</option> 
-		<option value="40">40*40</option> 
-	</select> 
-	<select id="selSpeed"> 
-		<option value="500">速度-慢</option> 
-		<option value="250" selected="selected">速度-中</option> 
-		<option value="100">速度-快</option> 
-	</select> 
-	<input type="button" id="startBtn">"开始"</input>
+		<table id="pannel" class="pannel col-md-8 col-md-offset-2"></table>
 
+	</div>
 
 	<script src="/javascripts/jquery-1.10.2.min.js"></script>
 	<script src="/javascripts/bootstrap.min.js"></script>
